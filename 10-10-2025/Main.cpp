@@ -15,6 +15,7 @@ int main() {
 	std::string optionSelectedTemp = "";
 
 	std::string dniTemp;
+	bool deleteData = false;
 
 	for(;;) {
 		menu.showOptions();
@@ -58,7 +59,24 @@ int main() {
 			break;
 
 			case 4:
-				std::cout << "Seleccionó la opción 4.";
+				std::cout << "Ingrese el DNI de la persona que quiere eliminar: ";
+				std::getline(std::cin, dniTemp);
+
+				for(unsigned int i = 0; i < personQuantity; i++) {
+					if(person[i].existsDni(dniTemp)) {
+						deleteData = true;
+					}
+
+					if(deleteData && i < personQuantity - 1) {
+						person[i] = person[i + 1];
+					}
+				}
+
+				if(deleteData) {
+					deleteData = false;
+
+					personQuantity--;
+				}
 
 			break;
 
